@@ -12,9 +12,9 @@
 
 ### LAST STEP
 >cd gestion_bancaires </br>
->sudo systemctl mysql start
-(windows: start your mysql server)
->python manage.py migrate
->python manage.py runserver
+>sudo systemctl mysql start </br>
+(windows: start your mysql server) </br>
+>python manage.py migrate </br>
+>python manage.py runserver </br>
 
 
