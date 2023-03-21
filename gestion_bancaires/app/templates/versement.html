@@ -1,0 +1,58 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+   <div class="analytics-sparkle-area">
+            <!-- Static Table Start -->
+        <div class="data-table-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sparkline13-list">
+                            <div class="sparkline13-hd">
+                                <div class="main-sparkline13-hd">
+                                    <h1>Liste <span class="table-project-n">des </span> versement</h1>
+                                </div>
+                                <div class="add-product">
+                                    <a href="{% url 'versement_add'%}">Verser argent sur un compte</a>
+                                </div>
+                            </div>
+                            <div class="sparkline13-graph">
+                                <div class="datatable-dashv1-list custom-datatable-overright">
+                                    <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="false" data-show-refresh="false" data-key-events="false " data-show-toggle="false" data-resizable="true" data-cookie="false"
+                                        data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="false" data-toolbar="#toolbar">
+                                        <thead>
+                                            <tr>
+                                                <th data-field="id">Numero de compte</th>
+                                                <th data-field="num_ver">Numero de versement</th>
+                                                <th data-field="num_chec" >Numero de Chèque</th>
+                                                <th data-field="montant" >Montant</th>
+                                                <th data-field="action">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                            {% for versement in Versements %}
+                                            <tr>
+                                                <td>{{versement.num_compte_id }}</td>
+                                                <td>{{ versement.num_vers }}</td>
+                                                <td>{{ versement.num_cheque }}</td>
+                                                <td>{{ versement.montant }} <span>Ar</span></td>
+                                               <td>
+                                                    <a href="{% url 'versement_update' id=versement.num_vers %}" style="color:#FFC107"><button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                                    <a data-id="" class="deleteEtudiant"  style="color:#E34724" href="#"><button data-toggle="tooltip" onClick="javascript:supprimerAchat('{{ versement.num_vers}}');" title="" class="pd-setting-ed" data-original-title="Trash"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %} 
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Static Table End -->
+   </div>
+{% endblock %}
