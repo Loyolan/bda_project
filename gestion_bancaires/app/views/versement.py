@@ -31,7 +31,8 @@ def index_update_ver(reponse,id):
     elif reponse.method=="POST":
         if 'update' in reponse.POST:
             numero=Versement.objects.filter(num_cheque=reponse.POST["num_chec"])
-            if len(numero)==1:
+            # print(numero.count())
+            if numero.count()==0:
                 client=Client.objects.get(num_compte=reponse.POST['num_compte'])
                 versement = Versement.objects.get(num_vers=id)
                 versement.num_cheque=reponse.POST['num_chec']
@@ -40,11 +41,12 @@ def index_update_ver(reponse,id):
                 versement.save()
                 return redirect("/bda/gestion_bancaires/versement/")
             else:
+                versement = Versement.objects.get(num_vers=id)
                 error="Le numero de cheque est deja initié par autre cheque!"
-                return render(reponse, 'versement_update.html', {'error': error, 'title': "VERSEMENT",'clients':all})
+                return render(reponse, 'versement_update.html', {'error': error, 'title': "VERSEMENT", 'clients': all, 'versement': versement})
         else:
             return redirect("/bda/gestion_bancaires/versement/add/")
-
+ 
 
 def ajax_formVer(requete):
     html_to_return = ""
