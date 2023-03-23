@@ -1,0 +1,16 @@
+{% extends 'main/error.html' %}
+
+{% block content %}
+<div class="error-pagewrap">
+		<div class="error-page-int">
+			<div class="content-error">
+				<h1>PAGE INTROUVABLE<span class="counter"> 500</span></h1>
+				<p>Desole, {{ message }}</p>
+				<a href="index.html">Retourner a la page d'accueil</a>
+			</div>
+			<div class="text-center login-footer">
+				<p>Copyright © 2023. Projet BDA </p>
+			</div>
+		</div>   
+</div>
+{% endblock %}

@@ -1,0 +1,173 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="contacts-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row text-right" style="padding-right: 40px;">
+            <a class="Warning Warning-color btn btn-success mg-b-10" href="#" data-toggle="modal" data-target="#WarningModalftblack"><i class="fa fa-plus edu-checked-pro" aria-hidden="true"></i> Nouveau client</a>
+        </div>
+        <div class="row">
+            {% for client in clients %}
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30">
+                    <div class="panel-body custom-panel-jw">
+                        <div class="social-media-in">
+                            <a href="#" data-toggle="modal" onclick="update_client('{{client.num_compte}}', '{{client.nom_client}}', '{{client.solde}}')" data-target="#PrimaryModalftblack"><i class="fa fa-edit"></i></a>
+                            <a href="#" data-toggle="modal" onclick="delete_client('{{client.num_compte}}','{{client.nom_client}}')" data-target="#DangerModalalert"><i class="fa fa-trash-o"></i></a>
+                        </div>
+                        <img alt="logo" class="img-circle m-b" width="100px" height="100px" src="{% static 'images/avatar.png' %}">
+                        <h3><a href="">{{client.nom_client}}</a></h3>
+                        <p class="all-pro-ad">{{client.num_compte}}</p>
+                    </div>
+                    <div class="panel-footer contact-footer">
+                        <div class="professor-stds-int">
+                            <div class="professor-stds">
+                                <div class="contact-stat"><span>Solde: </span> <strong>{{client.solde}}</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- MODAL ADD -->
+<div id="WarningModalftblack" btn btn-success class="modal modal-edu-general Customwidth-popup-WarningModal PrimaryModal-bgcolor fade" role="dialog">
+    <div class="modal-dialog">
+        <form action="/bda/gestion_bancaires/add_clients/" method="POST" class="modal-content">
+            {% csrf_token %}
+            <div class="modal-close-area modal-close-df">
+                <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+            </div>
+            <div class="modal-body">
+                <span class="educate-icon educate-professor modal-check-pro information-icon-pro"></span>
+                <h2>Nouveau client</h2>
+                <div>
+                    <div class="input-mark-inner">
+                        <input type="text" id="new_num" onkeyup="verify_num()" name="num_compte" class="form-control" data-mask="99999" placeholder="Numero de compte">
+                    </div>
+                    <br>
+                    <div class="form-group-inner">
+                        <input type="text" minlength="4" name="nom_client" class="form-control" placeholder="Nom du client" required>
+                    </div>
+                    <div class="input-group custom-go-button">
+                        <span class="input-group-btn"><button type="button" class="btn btn-success">Solde Intiale</button></span>
+                        <input type="text" name="solde" value="0" placeholder="" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer footer-modal-admin warning-md row">
+                <div class="col-md-2">
+                    
+                </div>
+                <div class="col-md-8">
+                    <button id="save_client" type="button" class="form-control btn btn-primary">Enregistrer</button>
+                </div>
+                <div class="col-md-2">
+                    
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL EDIT -->
+<div id="PrimaryModalftblack" class="modal modal-edu-general default-popup-PrimaryModal PrimaryModal-bgcolor fade" role="dialog">
+    <div class="modal-dialog">
+        <form id="link_update" action="#" method="POST" class="modal-content">
+            {% csrf_token %}
+            <div class="modal-close-area modal-close-df">
+                <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+            </div>
+            <div class="modal-body">
+                <i class="educate-icon educate-event modal-check-pro"></i>
+                <div>
+                    <div class="input-mark-inner">
+                        <input type="text" id="num_compte" name="num_compte" class="form-control" data-mask="99999" placeholder="Numero de compte" readonly>
+                    </div>
+                    <br>
+                    <div class="form-group-inner">
+                        <input type="text" id="nom_client" minlength="4" name="nom_client" class="form-control" placeholder="Nom du client" required>
+                    </div>
+                    <div class="input-group custom-go-button">
+                        <span class="input-group-btn"><button type="button" class="btn btn-primary">Nouveau Solde</button></span>
+                        <input type="text" id="solde" name="solde" placeholder="" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer footer-modal-admin">
+                <div class="col-md-2">
+                    
+                </div>
+                <div class="col-md-8">
+                    <button type="submit" class="form-control btn btn-primary">Enregistrer</button>
+                </div>
+                <div class="col-md-2">
+                    
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL DELETE -->
+<div id="DangerModalalert" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-close-area modal-close-df">
+                <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+            </div>
+            <div class="modal-body">
+                <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
+                <h2>Suppression</h2>
+                <p>Etes-vous sur de vouloir supprimer le client <b id="nom"></b> portant le numero de compte <b id="num"></b> definitivement ? 
+                    <br>Attention, L'operation est irreversible et l'administration peux voir cette action.
+                    <br> Cliquer sur confirmer pour executer la suppression.
+                </p>
+            </div>
+            <div class="modal-footer danger-md">
+                <div class="col-md-2">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a id="link_delete" class="form-control text-center" href="#">Confirmer</a>
+                </div>
+                <div class="col-md-2">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function verify_num(){
+        var new_num = Number($("#new_num").val())
+        if (new_num != NaN)
+            var clients = JSON.parse('{{ num_cli }}')
+            if (clients.indexOf(new_num) !== -1){
+                $("#new_num").css('border', '1px solid red')
+                $("#save_client").attr('type', 'button')
+            } else {
+                $("#new_num").css('border', '1px solid green')
+                $("#save_client").attr('type', 'submit')
+            }
+    }
+    
+
+    function update_client(num, nom, solde){
+        $("#num_compte").val(num)
+        $("#nom_client").val(nom)
+        $("#solde").val(solde)
+        $("#link_update").attr("action", '/bda/gestion_bancaires/update_clients/'+ num +"/")
+    }
+
+    function delete_client(num, nom) {
+        $("#num").text(num)
+        $("#nom").text(nom)
+        $("#link_delete").attr("href", "/bda/gestion_bancaires/delete_clients/"+ num +"/")
+    }
+</script>
+{% endblock %}
