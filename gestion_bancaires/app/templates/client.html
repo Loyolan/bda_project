@@ -1,6 +1,21 @@
 {% extends 'main/base.html' %}
 {% load static %}
 
+{% block search %}
+<form role="search" class="sr-input-func">
+    <input type="text" onkeyup="c_search()" id="search" placeholder="Recherche..." class="search-int form-control">
+    <a href="#"><i class="fa fa-search"></i></a>
+</form>
+<script type="text/javascript">
+    function c_search(){
+        var value = $("#search").val().toLowerCase();
+        $(".filter").filter(function() {
+            $(this).parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    }
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="contacts-area mg-b-15">
     <div class="container-fluid">
@@ -11,13 +26,13 @@
             {% for client in clients %}
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30">
-                    <div class="panel-body custom-panel-jw">
+                    <div  id="filter" class="panel-body custom-panel-jw">
                         <div class="social-media-in">
                             <a href="#" data-toggle="modal" onclick="update_client('{{client.num_compte}}', '{{client.nom_client}}', '{{client.solde}}')" data-target="#PrimaryModalftblack"><i class="fa fa-edit"></i></a>
                             <a href="#" data-toggle="modal" onclick="delete_client('{{client.num_compte}}','{{client.nom_client}}')" data-target="#DangerModalalert"><i class="fa fa-trash-o"></i></a>
                         </div>
                         <img alt="logo" class="img-circle m-b" width="100px" height="100px" src="{% static 'images/avatar.png' %}">
-                        <h3><a href="">{{client.nom_client}}</a></h3>
+                        <h3 class="filter">{{client.nom_client}}</h3>
                         <p class="all-pro-ad">{{client.num_compte}}</p>
                     </div>
                     <div class="panel-footer contact-footer">
@@ -143,6 +158,7 @@
 </div>
 
 <script type="text/javascript">
+
     function verify_num(){
         var new_num = Number($("#new_num").val())
         if (new_num != NaN)
