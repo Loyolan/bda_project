@@ -18,3 +18,4 @@
 >python manage.py runserver </br>
 
 from nelly walker
+BRANCK TEST KIAD
