@@ -2,6 +2,7 @@ from django.urls import path
 from app.views import home
 from app.views import client
 urlpatterns = [
+	path('login/', home.login),
 	path('home/', home.index),
 	path('clients/', client.clients),
 	path('add_clients/', client.addClient),
