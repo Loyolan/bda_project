@@ -71,7 +71,8 @@
 			<div class="content-error">
 				<div class="hpanel">
                     <div class="panel-body">
-                        <form action="#" id="loginForm">
+                        <div action="/bda/gestion_bancaires/login/" id="loginForm" method="POST">
+                            {% csrf_token %}
                             <div class="form-group">
                                 <label class="control-label" for="username">Username</label>
                                 <input type="text" placeholder="user" title="Votre nom d'utilisateur" required name="username" class="form-control">
@@ -82,20 +83,24 @@
                                 <input type="password" title="Please enter your password" placeholder="******" required="" value="" name="password" id="password" class="form-control">
                                 <span class="help-block small">Mot de passe</span>
                             </div>
-                            
-                            <button class="btn btn-success btn-block loginbtn">Login</button>
-                        </form>
+                            <div>
+                                <p id="alertlogin" style="color: red; text-align: center;"></p>
+                            </div>
+                            <button type="button" id="loginbtn" class="btn btn-success btn-block loginbtn">Login</button>
+                        </div>
                     </div>
                 </div>
 			</div>
 			<div class="text-center login-footer">
-				<p>BDA project © 2018. All rights reserved.by <a href="#">Bandy Capable</a></p>
+				<p>BDA project © 2023</p>
 			</div>
 		</div>   
     </div>
     <!-- jquery
 		============================================ -->
     <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+
+    <script src="{% static 'js/login.js' %}"></script>
     <!-- bootstrap JS
 		============================================ -->
     <script src="{% static 'js/bootstrap.min.js' %}"></script>

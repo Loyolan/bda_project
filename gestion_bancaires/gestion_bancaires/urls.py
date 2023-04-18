@@ -21,7 +21,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("bda/gestion_bancaires/", include('app.urls'))
+    path("bda/gestion_bancaires/", include('app.urls')),
+    paht("admin/gestion_bancaires/", include('app.adminurl'))
 ]
 
 if settings.DEBUG:
