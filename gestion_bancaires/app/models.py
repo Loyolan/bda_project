@@ -26,6 +26,7 @@ class Retrait(models.Model):
 
 class AuditOperation(models.Model):
     id_ao = models.AutoField(primary_key=True)
+    type_op = models.CharField(max_length=10)
     date = models.DateField()
     num_cheque = models.CharField(max_length=5)
     num_compte = models.CharField(max_length=5)
@@ -45,7 +46,7 @@ class AuditVersement(models.Model):
     utilisateur = models.CharField(max_length=12)
 
 class AuditRetrait(models.Model):
-    id_av = models.AutoField(primary_key=True)
+    id_ar = models.AutoField(primary_key=True)
     type_action = models.CharField(max_length=12)
     date = models.DateField()
     num_ret = models.CharField(max_length=5)
@@ -56,7 +57,7 @@ class AuditRetrait(models.Model):
     utilisateur = models.CharField(max_length=12)
 
 class AuditCompte(models.Model):
-    id_av = models.AutoField(primary_key=True)
+    id_ac = models.AutoField(primary_key=True)
     type_action = models.CharField(max_length=12)
     date = models.DateField()
     num_compte = models.CharField(max_length=5)

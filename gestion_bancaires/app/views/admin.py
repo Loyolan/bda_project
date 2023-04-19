@@ -4,31 +4,31 @@ from app.models import AuditOperation, AuditVersement, AuditRetrait, AuditCompte
 
 def audit_operation(r):
 	data = {
-		"title": "AUDIT OPERATION",
+		"title": "OPERATION",
 		"audits" : AuditOperation.objects.all()
 	}
-	return render(r, 'audit_operation.html', data)
+	return render(r, 'admin/audit_operation.html', data)
 
 
 def audit_versement(r):
 	data = {
-		"title": "AUDIT VERSEMENT",
+		"title": "VERSEMENT",
 		"audits" : AuditVersement.objects.all()
 	}
-	return render(r, 'audit_versement.html', data)
+	return render(r, 'admin/audit_versement.html', data)
 
 
 def audit_retrait(r):
 	data = {
-		"title": "AUDIT RETRAIT",
+		"title": "RETRAIT",
 		"audits" : AuditRetrait.objects.all()
 	}
-	return render(r, 'audit_retrait.html', data)
+	return render(r, 'admin/audit_retrait.html', data)
 
 
 def audit_compte(r):
 	data = {
-		"title": "ADMINISTRATION",
+		"title": "COMPTE",
 		"audits" : AuditCompte.objects.all()
 	}
-	return render(r, 'audit_compte.html', data)
+	return render(r, 'admin/audit_compte.html', data)

@@ -1,0 +1,41 @@
+{% extends '../main/base-admin.html' %}
+{% load static %}
+{% block content %}
+		<div class="product-status mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="product-status-wrap">
+                            <h4>AUDIT {{title}}</h4>
+                            <div class="asset-inner">
+                                <table>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Date</th>
+                                        <th>Type d'operation</th>
+                                        <th>No Cheque</th>
+                                        <th>No Compte</th>
+                                        <th>Nom Client</th>
+                                        <th>Montant</th>
+                                        <th>User</th>
+                                    </tr>
+                                    {% for audit in audits %}
+                                    <tr>
+                                        <td>{{audit.id_ao}}</td>
+                                        <td>{{audit.date}}</td>
+                                        <td><button class="pd-setting">{{audit.type_ao}}</button></td>
+                                        <td>{{audit.num_cheque}}</td>
+                                        <td>{{audit.num_compte}}</td>
+                                        <td>{{audit.nom_client}}</td>
+                                        <td>$ {{audit.montant}}</td>
+                                        <td>{{audit.utilisateur}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

@@ -2,12 +2,14 @@ $(document).ready(()=>{
 	user = getSession()
 	role = location.pathname.split('/')
 	if (user.username == 'bda') {
+		$("#current-user").text(user.username.toUpperCase())
 		if(role[1] != 'bda' || role[3] == 'login') {
 			location.assign('http://127.0.0.1:8000/bda/gestion_bancaires/home/')
 		}
 	} else if (user.username == 'admin') {
-		if(role[1] != 'admin'){
-			location.assign('http://127.0.0.1:8000/admin/gestion_bancaires/home/')
+		$("#current-user").text(user.username.toUpperCase())
+		if(role[1] != 'administration'){
+			location.assign('http://127.0.0.1:8000/administration/gestion_bancaires/audit_compte/')
 		}
 	} else {
 		if(role[3] != 'login'){
@@ -23,7 +25,8 @@ $('#loginbtn').click(()=>{
 		setSession(username, password)
 		location.reload()
 	} else if (username == 'admin' && password == 'admin') {
-		sessionStorage(username, password)
+		setSession(username, password)
+		location.reload()
 	} else {
 		$("#alertlogin").text("Mot de passe ou nom d'utilisateur invalid!")
 	}
@@ -35,6 +38,11 @@ $("input[name='username']").focus(()=>{
 
 $("input[name='password']").focus(()=>{
 	$("#alertlogin").text("")
+})
+
+$("#deconnexion").click(()=>{
+	dropSession()
+	location.reload()
 })
 
 function getSession() {
