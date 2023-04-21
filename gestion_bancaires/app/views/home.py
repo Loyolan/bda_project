@@ -20,6 +20,6 @@ def index(response):
 	clients = Client.objects.all()
 	total = sum([c.solde for c in clients])
 	for c in clients:
-		c.percent = (c.solde / total) * 100
+		c.percent = round((c.solde / total) * 100, 2)
 	data = {"title": "ACCUEIL", "clients": clients, }
 	return render(response, "home.html", data)

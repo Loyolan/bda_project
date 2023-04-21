@@ -1,0 +1,121 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="single-pro-review-area mt-t-30 mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="profile-info-inner">
+                    <div class="profile-img">
+                        <img src="{% static 'images/profile/1.jpg' %} " alt="" />
+                    </div>
+                    <div class="profile-details-hr">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="address-hr">
+                                    <p><b>ABONNE TOI</b></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <div class="address-hr">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <h3>500</h3>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <div class="address-hr">
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <h3>900</h3>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <div class="address-hr">
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    <h3>600</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
+                    <ul id="myTabedu1" class="tab-review-design">
+                        <li class="active"><a href="#description">RETRAIT D'ARGENT</a></li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content custom-product-edit">
+
+                        <div class="product-tab-list tab-pane fade active in" id="description">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <form action="{% url 'insert_retrait' %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="review-content-section">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    {% if messages %}
+                                                    <div class="alert alert-info">
+                                                        {% for message in messages %}
+                                                        {{ message }}
+                                                        {% endfor %}
+                                                    </div>
+                                                    {% endif %}
+                                                    <div class="">
+                                                        <label class="login2">N<sup>o</sup> de Compte du client</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input name="num_compte" type="text" class="form-control"
+                                                            placeholder="Numero de compte">
+                                                    </div>
+                                                    <div class="">
+                                                        <label class="login2">N<sup>o</sup> de chèque du client</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input name="num_cheque" type="text" class="form-control"
+                                                            placeholder="Numero chèque">
+                                                    </div>
+                                                    <div class="">
+                                                        <label class="login2">Montant à retirer</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input name="montant" type="text" class="form-control"
+                                                            placeholder="Montant">
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12 ">
+                                                            <div class="payment-adress mg-t-15">
+                                                                <button type="submit"
+                                                                    class="btn btn-primary waves-effect waves-light mg-b-15"
+                                                                    style="background-color: #555555;width: 300px; ">VALIDER
+                                                                    LE RETRAIT</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                    <div class="basic-login-inner" style="text-align:center">
+                                                        <h3>BIENVENU ICI</h3>
+                                                        <p>Que voulez-vous faire ?</p>
+                                                        <div class="create-account-sign">
+                                                            <a href="#"><i class="fa fa-sign-in big-icon"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

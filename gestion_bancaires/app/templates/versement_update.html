@@ -1,0 +1,85 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="single-pro-review-area mt-t-30 mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="product-payment-inner-st">
+                            <ul id="myTabedu1" class="tab-review-design">
+                                <li class="active"><a href="#description">Modifier versement</a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content custom-product-edit">
+                                <div class="product-tab-list tab-pane fade active in" id="description">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div id="dropzone1" class="pro-ad">
+
+                                                    <!--formulaire ajout etudiant -->
+                                                    <form action="{% url 'versement_update' id=versement.num_vers %}" method="POST"class="dropzone dropzone-custom needsclick add-professors dz-clickable" >
+                                                        {% csrf_token %}
+                                                        {% if error or ko %}
+                                                        <p class="errornote" id="ko" style="color:red;text-align:center;font-size: 14px;
+                                                font-weight: 700;
+                                                display: block;
+                                                padding: 10px 12px;
+                                                margin: 0 0 10px 0;
+                                                color: #ba2121;
+                                                border: 1px solid #ba2121;
+                                                border-radius: 4px;
+                                                background-color: #fff;
+                                                background-position: 5px 12px;">{{ error }}{{ ko }}</p>
+                                                        {% endif %}
+                                                       
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                  <div class="form-group">
+                                                                    <label>Numero du cheque</label>
+                                                                    <input name="num_chec" type="text" class="form-control" value="{{versement.num_cheque}}" 
+                                                                required>
+                                                                </div>
+                                                                
+                                                                <div class="form-group">
+                                                                    <label>Numero de compte</label>
+                                                                    <select name="num_compte" class="form-control" name="num_compte">
+                                                                        {% for client in clients %}
+                                                                        {% if client.num_compte == versement.num_compte_id%}
+                                                                            <option selected="selected" value="{{client.num_compte}}">{{client.num_compte}} : {{ client.nom_client }}</option>
+                                                                        {% else %}
+                                                                            <option value="{{client.num_compte}}">{{client.num_compte}} : {{ client.nom_client }}</option>
+                                                                        {%endif%}
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                </div>
+                                                          
+                                                                
+                                                                <div class="form-group">
+                                                                    <label>Montant</label>
+                                                                    <input name="montant" value="{{versement.montant}}" type="number" required class="form-control" >
+                                                                </div>
+                                                            
+                                                            </div>
+                                                        
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-1">
+                                                                <div class="payment-adress">
+                                                                    <button type="submit" name="update" class="btn btn-primary waves-effect waves-light">Modifier</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

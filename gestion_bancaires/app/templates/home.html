@@ -6,15 +6,21 @@
             <div class="container-fluid">
                 <div class="row">
                     {% for client in clients %}
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="margin-top: 50px;box-shadow: 0px 4px 8px 0px; text-align: center; height: 150px; margin-left: 70px; border-bottom-left-radius: 20px; border-top-right-radius: 20px">
                         <div class="analytics-sparkle-line reso-mg-b-30">
-                            <div class="analytics-content">
-                                <h5>{{client.nom_client}}</h5>
-                                <h2>$<span class="counter">{{client.solde}}</span> <span class="tuition-fees">{{client.num_compte}}</span></h2>
-                                <span class="text-success">{{client.percent}}%</span>
-                                <div class="progress m-b-0">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:{{client.percent}}%;"> <span class="sr-only">{{client.percent}}% Complete</span> </div>
+                            <div class="analytics-content row">
+                                <div class="col-md-4">
+                                    <img src="{% static 'images/avatar.png' %}">
                                 </div>
+                                <div class="col-md-8">
+                                    <h5>{{client.nom_client}}</h5>
+                                    <h2>$<span class="counter">{{client.solde}}</span> <span class="tuition-fees">{{client.num_compte}}</span></h2>
+                                    <span class="text-success">{{client.percent}}%</span>
+                                    <div class="progress m-b-0">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:{{client.percent}}%;"> <span class="sr-only">{{client.percent}}% Complete</span> </div>
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
