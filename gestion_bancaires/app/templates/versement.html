@@ -2,6 +2,51 @@
 {% load static %}
 
 {% block content %}
+<!--   ok  -->
+	{% if ok in "" %}
+	{% else %}
+	<ul class="messagelist" id="succes" style="position:fixed;position: fixed;margin-top: revert;z-index: 9;">
+              <li class="success" style="
+              padding-left: 40px;
+    background-position: 15px 12px;
+    display: block;
+    font-weight: 400;
+    font-size: 13px;
+    padding: 10px 10px 10px 65px;
+    margin: 0 0 10px 0;
+    background: #dfd url({% static '/images/icon-yes.svg' %}) 40px 12px no-repeat;
+    background-size: 16px auto;
+    color: #333;"> <a href="#">{{ ok }}</a></li></ul>
+    <script type="text/javascript">
+    $("#succes").fadeOut(6000,function(){
+    	document.location.href="/dev/welcome"
+	});
+	</script>
+    {% endif %}
+ <!-- fin ok -->   
+ <!--  tsy ok  -->
+    {% if ko in "" %}
+	{% else %}
+	<ul class="messagelist" id="succes" style="position:fixed;position: fixed;margin-top: revert;z-index: 9;">
+              <li class="error" style="
+              padding-left: 40px;
+              
+    background-position: 15px 12px;
+    display: block;
+    font-weight: 400;
+    font-size: 13px;
+    padding: 10px 10px 10px 65px;
+    margin: 0 0 10px 0;
+    background: #f1e880 url({% static '/images/icon-no.svg' %}) 40px 12px no-repeat;
+    background-size: 16px auto;
+    color: #333;"> <a href="#">{{ ko }}</a></li></ul>
+    <script type="text/javascript">
+    $("#succes").fadeOut(6000,function(){
+    	//document.location.href="/welcome"
+	});
+	</script>
+    {% endif %}
+ <!--  fin tsy ok -->
    <div class="analytics-sparkle-area">
             <!-- Static Table Start -->
         <div class="data-table-area mg-b-15">

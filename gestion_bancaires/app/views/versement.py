@@ -1,9 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from app.models import *
+
 def index_ver(reponse):
     all = Versement.objects.all()
-    return render(reponse,"versement.html",{'title':"VERSEMENT", 'Versements':all});
+    return render(reponse,"versement.html",{'title':"VERSEMENT", 'Versements':all,'ko':'','ok':''});
+
 def index_add_ver(reponse):
     all=Client.objects.all()
     
@@ -59,3 +61,5 @@ def ajax_formVer(requete):
     else:
         html_to_return = "Erreur"
         return HttpResponse(html_to_return)
+
+
