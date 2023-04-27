@@ -18,12 +18,14 @@ from django.urls import path, include
 from app.views.home import login
 from django.conf import settings
 from django.conf.urls.static import static
+from app.views.versement import ajax_formVer
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", login),
     path("bda/gestion_bancaires/", include('app.urls')),
-    path("administration/gestion_bancaires/", include('app.adminurl'))
+    path("administration/gestion_bancaires/", include('app.adminurl')),
+    path("/ajax/form",ajax_formVer)
 ]
 
 if settings.DEBUG:
