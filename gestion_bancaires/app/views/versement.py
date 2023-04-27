@@ -31,8 +31,8 @@ def index_update_ver(reponse,id):
     elif reponse.method=="POST":
         if 'update' in reponse.POST:
             numero=Versement.objects.filter(num_cheque=reponse.POST["num_chec"])
-            # print(numero.count())
-            if numero.count()==0:
+            #print(numero.count())
+            if len(numero) == 1:
                 client=Client.objects.get(num_compte=reponse.POST['num_compte'])
                 versement = Versement.objects.get(num_vers=id)
                 versement.num_cheque=reponse.POST['num_chec']

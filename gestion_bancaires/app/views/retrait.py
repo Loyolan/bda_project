@@ -21,8 +21,8 @@ def retrait(request):
 				montant = request.POST.get('montant')
 				client = Client.objects.get(num_compte = num_compte)
 				if client.solde >= int(montant):
-					client.solde -= int(montant)
-					client.save()
+					# client.solde -= int(montant)
+					# client.save()
 
 					obj_retrait = Retrait.objects.create(num_cheque = num_cheque, montant = montant, num_compte = client)
 					obj_retrait.save()

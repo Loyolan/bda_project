@@ -25,7 +25,7 @@ urlpatterns = [
     path("", login),
     path("bda/gestion_bancaires/", include('app.urls')),
     path("administration/gestion_bancaires/", include('app.adminurl')),
-    path("/ajax/form",ajax_formVer)
+    path("ajax/form",ajax_formVer)
 ]
 
 if settings.DEBUG:
