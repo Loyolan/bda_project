@@ -24,6 +24,7 @@
                                         <thead>
                                             <tr>
                                                 <th data-field="id" width="300px">Compte</th>
+                                                <th>Nom du client</th>
                                                 <th data-field="num_ver" width="200px">Numero de versement</th>
                                                 <th data-field="num_chec" width="200px">Numero de Chèque</th>
                                                 <th data-field="montant" width="200px">Montant</th>
@@ -35,9 +36,10 @@
                                             {% for versement in Versements %}
                                             <tr>
                                                 <td>{{versement.num_compte_id }}</td>
+                                                <td>{{versement.num_compte.nom_client}}</td>
                                                 <td>{{ versement.num_vers }}</td>
                                                 <td>{{ versement.num_cheque }}</td>
-                                                <td>{{ versement.montant }} <span>Ar</span></td>
+                                                <td>{{ versement.montant }} <span>$</span></td>
                                                <td>
                                                     <a href="{% url 'versement_update' id=versement.num_vers %}" style="color:#FFC107"><button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
                                                     <a data-id="" class="deleteEtudiant"  style="color:#E34724" href="#"><button data-toggle="tooltip" onClick="javascript:supprimerAchat('{{ versement.num_vers}}');" title="" class="pd-setting-ed" data-original-title="Trash"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>

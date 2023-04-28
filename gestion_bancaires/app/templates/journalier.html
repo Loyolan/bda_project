@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<div class="analytics-sparkle-area">
+<!-- <div class="analytics-sparkle-area">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
@@ -56,11 +56,17 @@
                 </div>
             </div>
         </div>
-        <!-- BEGIN HERE MY CODE BODY -->
-<br>
-<br>
+    
+ <br>
+<br> -->
 <div class="static-table-area">
             <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-10"></div>
+                    <div class="col-md-2">
+                        <a class="Warning Warning-color btn btn-success mg-b-10" href="{% url 'showpageretrait' %}"><i class="fa fa-plus edu-checked-pro" aria-hidden="true"></i> Nouveau retrait</a>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="sparkline8-list">
@@ -79,6 +85,7 @@
                                                 <th>N<sup>o</sup> DE CHEQUE</th>
                                                 <th>MONTANT A RETIRER</th>
                                                 <th>SOLDE</th>
+                                                <th>ACTION</th>
                                             </tr>
                                         </thead>
                                         {% if key1 %}
@@ -90,6 +97,10 @@
                                                         <td>{{ i.num_cheque }}</td>
                                                         <td>{{ i.montant }}</td>
                                                         <td>{{ i.num_compte.solde }}</td>
+                                                        <td>
+                                                            <a href="{% url 'retrait_update' id=i.num_ret %}" style="color:#FFC107"><button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                                            <a href="#" data-toggle="modal" onclick="delete_retrait('{{i.num_ret}}','{{i.montant}}')" data-target="#DangerModalalert"><button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></button></a>
+                                                        </td>
                                                     </tr>
                                                 {% endfor %}                                           
                                         {% else %}
@@ -106,4 +117,40 @@
 </div>
 <br>
 <br>
+<script type="text/javascript">
+    function delete_retrait(num, nom) {
+        $("#num").text(num)
+        $("#nom").text(nom)
+        $("#link_delete").attr("href", "/bda/gestion_bancaires/retrait/delete/"+ num +"/")
+    }
+</script>
+<!-- MODAL DELETE -->
+<div id="DangerModalalert" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-close-area modal-close-df">
+                <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+            </div>
+            <div class="modal-body">
+                <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
+                <h2>Suppression</h2>
+                <p>Etes-vous sur de vouloir supprimer cet retrait numero <b id="num"></b>, cheque numero <b id="nom"></b> definitivement ? 
+                    <br>Attention, L'operation est irreversible et l'administration peux voir cette action.
+                    <br> Cliquer sur confirmer pour executer la suppression.
+                </p>
+            </div>
+            <div class="modal-footer danger-md">
+                <div class="col-md-2">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a id="link_delete" class="form-control text-center" href="#">Confirmer</a>
+                </div>
+                <div class="col-md-2">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

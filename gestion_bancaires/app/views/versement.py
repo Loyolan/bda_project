@@ -2,8 +2,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from app.models import *
 def index_ver(reponse):
-    all = Versement.objects.all()
+    all = Versement.objects.select_related('num_compte').all()
     return render(reponse,"versement.html",{'title':"VERSEMENT", 'Versements':all});
+
 def index_add_ver(reponse):
     all=Client.objects.all()
     

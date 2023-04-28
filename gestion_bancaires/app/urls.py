@@ -17,4 +17,6 @@ urlpatterns = [
     path('showpageretrait/', retrait.show_page_retrait, name="showpageretrait"),
 	path('showpagejournalier/', retrait.show_page_journalier, name="showpagejournalier"),
 	path('insert_retrait/', retrait.retrait, name="insert_retrait"),
+    path('retrait/update/<int:id>', retrait.index_update_ret, name="retrait_update"),
+    path('retrait/delete/<int:id>/', retrait.delete_retrait)
 ]

@@ -9,7 +9,8 @@ from django.db import transaction
 #	return redirect('/bda/gestion_bancaires/home/')
 
 def show_page_retrait(response):
-	data = {"title": "RETRAIT"}
+	clients = Client.objects.all()
+	data = {"title": "RETRAIT", "clients": clients}
 	return render(response, "retrait.html", data)
 
 def retrait(request):
@@ -38,9 +39,35 @@ def retrait(request):
 
 
 def show_page_journalier(request):
-	nombre_clients = Client.objects.count()
-	nombre_retraits = Retrait.objects.count()
-	nombre_versement = AuditVersement.objects.count()
-	nombre_compte = AuditCompte.objects.count()
 	retraits = Retrait.objects.select_related('num_compte').all()	
-	return render(request, "journalier.html", {'nbr_cli':nombre_clients,'nbr_versement':nombre_versement,'nbr_retrait':nombre_retraits,'nbr_compte':nombre_compte,'key1':retraits, 'title': "JOURNALIER"})
+	return render(request, "journalier.html", {'key1':retraits, 'title': "JOURNALIER"})
+
+
+def index_update_ret(reponse,id):
+    all=Client.objects.all()
+    if reponse.method=="GET":
+        retrait = Retrait.objects.get(num_ret=id)
+        return render(reponse,"retrait_update.html",{'title':"RETRAIT",'clients':all,'retrait':retrait})
+    elif reponse.method=="POST":
+        if 'update' in reponse.POST:
+            numero=Retrait.objects.filter(num_cheque=reponse.POST["num_chec"])
+            #print(numero.count())
+            if len(numero) == 1:
+                client=Client.objects.get(num_compte=reponse.POST['num_compte'])
+                retrait = Retrait.objects.get(num_ret=id)
+                retrait.num_cheque=reponse.POST['num_chec']
+                retrait.num_compte_id=client
+                retrait.montant=reponse.POST['montant']
+                retrait.save()
+                return redirect("/bda/gestion_bancaires/showpagejournalier/")
+            else:
+                retrait = Retrait.objects.get(num_ret=id)
+                error="Le numero de cheque est deja initié par autre cheque!"
+                return render(reponse, 'retrait_update.html', {'error': error, 'title': "RETRAIT", 'clients': all, 'retrait': retrait})
+        else:
+            return redirect("/bda/gestion_bancaires/showpagejournalier/")
+
+def delete_retrait(r, id):
+	ret = Retrait.objects.get(num_ret=id)
+	ret.delete()
+	return redirect("/bda/gestion_bancaires/showpagejournalier/")
